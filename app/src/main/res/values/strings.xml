@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DateTimePickerEditTextDemo</string>
+    <string name="date">Date</string>
+    <string name="set_date">Set Date:</string>
+    <string name="set_time">Set Time:</string>
+    <string name="time">Time</string>
+    <string name="submit">Submit</string>
+    <string name="err_invalid_date">Invalid Date</string>
+    <string name="err_invalid_time">Invalid Time</string>
+    <string name="msg_submit">Submit date: %1$s and Time: %2$s</string>
+    <string name="now">Now</string>
+    <string name="today">Today</string>
+</resources>
