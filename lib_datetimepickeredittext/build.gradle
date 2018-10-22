@@ -1,11 +1,25 @@
+apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.android.library'
+
+publish {
+    def groupProjectID = 'android.helper'
+    def artifactProjectID = 'datetimepickeredittext'
+    def publishVersionID = '1.0.0'
+
+    userOrg = 'ankurgecr'
+    repoName = 'dateTimePickerEditText'
+    groupId = groupProjectID
+    artifactId = artifactProjectID
+    publishVersion = publishVersionID
+    desc = 'Simple Edittext with Android\'s default DatePicker and TImePicker functionality'
+    website = 'https://github.com/ankurgecr/DateTimePickerEditTextDemo'
+}
 
 android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion 8
         versionCode 1
         versionName "1.0.0"
     }
@@ -16,10 +30,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    def libSupportV = "28.0.0";
+    implementation "com.android.support:appcompat-v7:$libSupportV"
 }
