@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.DatePicker;
@@ -21,8 +22,18 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
         TimePickerDialog.OnTimeSetListener {
 
     public enum Type {
-        DATE_PICKER,
-        TIME_PICKER
+        DATE_PICKER(0),
+        TIME_PICKER(1);
+
+        int value;
+
+        Type(int value) {
+            this.value = value;
+        }
+
+        int getValue() {
+            return this.value;
+        }
     }
 
     private static final DateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
@@ -53,15 +64,25 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
     private void parseAttribute(AttributeSet attrs) {
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.DateTimePickerEditText, 0, 0);
         try {
-            String str_type = ta.getString(R.styleable.DateTimePickerEditText_type);
-            if ("time".equals(str_type)) {
-                type = Type.TIME_PICKER;
-                format = DEFAULT_TIME_FORMAT;
+
+            if (ta.hasValue(R.styleable.DateTimePickerEditText_android_inputType)) {
+                int valueTime = (InputType.TYPE_DATETIME_VARIATION_TIME | InputType.TYPE_CLASS_DATETIME);
+                int valueDate = (InputType.TYPE_DATETIME_VARIATION_DATE | InputType.TYPE_CLASS_DATETIME);
+                //int valueNormal = (InputType.TYPE_DATETIME_VARIATION_NORMAL |  InputType.TYPE_CLASS_DATETIME);
+                int value = ta.getInt(R.styleable.DateTimePickerEditText_android_inputType, valueDate);
+                if (value == valueTime) {
+                    type = Type.TIME_PICKER;
+                    format = DEFAULT_TIME_FORMAT;
+                } else {
+                    type = Type.DATE_PICKER;
+                    format = DEFAULT_DATE_FORMAT;
+                }
             } else {
                 type = Type.DATE_PICKER;
                 format = DEFAULT_DATE_FORMAT;
             }
-            String str_format = ta.getString(R.styleable.DateTimePickerEditText_format);
+
+            String str_format = ta.getString(R.styleable.DateTimePickerEditText_android_format);
             if (str_format != null && str_format.trim().length() > 0) {
                 setFormat(str_format);
             }

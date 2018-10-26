@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <declare-styleable name="DateTimePickerEditText">
-        <attr name="type" format="string" />
-        <attr name="format" format="string" />
+        <attr name="android:inputType" />
+        <attr name="android:format" format="string" />
     </declare-styleable>
 </resources>

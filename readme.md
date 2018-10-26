@@ -28,14 +28,17 @@ To add Date UI componenet in your Layout XML file
 <android.helper.DateTimePickerEditText
     android:id="@+id/edt_date"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+    android:inputType="date" />
 
 <android.helper.DateTimePickerEditText
     android:id="@+id/edt_time"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:type="time" />
+    android:inputType="time" />
 ```
+
+default value for android:inputType is "date"
 
 Get and Set contact numbers
 --------
@@ -61,7 +64,7 @@ To specify the date or time format, use
     android:id="@+id/edt_time"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:format="dd/MM/yyyy" />
+    android:format="dd/MM/yyyy" />
 ```
 
 or
