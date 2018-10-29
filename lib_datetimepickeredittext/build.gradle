@@ -4,7 +4,7 @@ apply plugin: 'com.android.library'
 publish {
     def groupProjectID = 'android.helper'
     def artifactProjectID = 'datetimepickeredittext'
-    def publishVersionID = '1.0.1'
+    def publishVersionID = '1.0.2'
 
     userOrg = 'ankurgecr'
     repoName = 'dateTimePickerEditText'
@@ -20,8 +20,8 @@ android {
 
     defaultConfig {
         minSdkVersion 8
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.2"
     }
 
     buildTypes {
@@ -30,6 +30,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+afterEvaluate {
+    generateReleaseBuildConfig.enabled = false
 }
 
 dependencies {

@@ -13,12 +13,14 @@ Preview
 Getting started
 ---------------
 
+[ ![latestVersion](https://api.bintray.com/packages/ankurgecr/dateTimePickerEditText/datetimepickeredittext/images/download.svg) ](https://api.bintray.com/packages/ankurgecr/dateTimePickerEditText/datetimepickeredittext/)
+
 To get started with DateTimePickerEditText, you'll need to get
 add the dependency to your project's build.gradle file:
 ```
 dependencies {
     //other dependencies
-    implementation "android.helper:dateTimePickerEditText:1.0.0"
+    implementation "android.helper:dateTimePickerEditText:$latestVersion"
 }
 ```
 Then to sync up your project and you are all set to use DateTimePickerEditText.
@@ -38,7 +40,7 @@ To add Date UI componenet in your Layout XML file
     android:inputType="time" />
 ```
 
-default value for android:inputType is "date"
+default value for `android:inputType` is `date`
 
 Get and Set contact numbers
 --------
@@ -56,7 +58,7 @@ Date selectedDate = edt_date.getDate();
 Date selectedTime = edt_time.getDate();
 ```
 
-You can use all properties of EditText for DateTimePickerEditText.
+You can use all properties of `EditText` for `DateTimePickerEditText`
 
 To specify the date or time format, use
 ```
