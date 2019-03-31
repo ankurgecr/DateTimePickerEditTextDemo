@@ -7,7 +7,11 @@
     <string name="submit">Submit</string>
     <string name="err_invalid_date">Invalid Date</string>
     <string name="err_invalid_time">Invalid Time</string>
-    <string name="msg_submit">Submit date: %1$s and Time: %2$s</string>
+    <string name="msg_submit">Submit date: %1$s, Time: %2$s and Delay: %3$s</string>
     <string name="now">Now</string>
     <string name="today">Today</string>
+    <string name="one_min">One Minute</string>
+    <string name="delay">Delay</string>
+    <string name="err_invalid_delay">Invalid Delay</string>
+    <string name="set_delay">Set Delay:</string>
 </resources>

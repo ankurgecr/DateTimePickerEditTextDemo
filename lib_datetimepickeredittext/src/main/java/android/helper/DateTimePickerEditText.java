@@ -4,7 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.text.InputType;
+import android.helper.utils.CustomTimePickerDialog;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.DatePicker;
@@ -15,15 +15,18 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 //android.helper.DateTimePickerEditText
 public class DateTimePickerEditText extends android.support.v7.widget.AppCompatEditText
         implements DatePickerDialog.OnDateSetListener,
-        TimePickerDialog.OnTimeSetListener {
+        TimePickerDialog.OnTimeSetListener,
+        CustomTimePickerDialog.OnTimeSetListener {
 
     public enum Type {
         DATE_PICKER(0),
-        TIME_PICKER(1);
+        TIME_PICKER(1),
+        DELAY_PICKER(2);
 
         int value;
 
@@ -38,11 +41,16 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
 
     private static final DateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
     private static final DateFormat DEFAULT_TIME_FORMAT = new SimpleDateFormat("hh:mm a");
+    private static final DateFormat DEFAULT_DELAY_FORMAT = new SimpleDateFormat("HH:mm:ss");
 
     private DateFormat format;
+    //private String delayFormat;
     private Type type = Type.DATE_PICKER;
     private Date selectedDate;
+    private long selectedDelay = 0;
+
     private Calendar initialDate = Calendar.getInstance();
+    private long initialDelay = 0;
 
     public DateTimePickerEditText(Context context) {
         super(context);
@@ -64,18 +72,21 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
     private void parseAttribute(AttributeSet attrs) {
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.DateTimePickerEditText, 0, 0);
         try {
-
-            if (ta.hasValue(R.styleable.DateTimePickerEditText_android_inputType)) {
-                int valueTime = (InputType.TYPE_DATETIME_VARIATION_TIME | InputType.TYPE_CLASS_DATETIME);
-                int valueDate = (InputType.TYPE_DATETIME_VARIATION_DATE | InputType.TYPE_CLASS_DATETIME);
-                //int valueNormal = (InputType.TYPE_DATETIME_VARIATION_NORMAL |  InputType.TYPE_CLASS_DATETIME);
-                int value = ta.getInt(R.styleable.DateTimePickerEditText_android_inputType, valueDate);
-                if (value == valueTime) {
-                    type = Type.TIME_PICKER;
-                    format = DEFAULT_TIME_FORMAT;
-                } else {
-                    type = Type.DATE_PICKER;
-                    format = DEFAULT_DATE_FORMAT;
+            if (ta.hasValue(R.styleable.DateTimePickerEditText_inputType)) {
+                int value = ta.getInt(R.styleable.DateTimePickerEditText_inputType, 0);
+                type = Type.values()[value];
+                switch (type) {
+                    case TIME_PICKER:
+                        format = DEFAULT_TIME_FORMAT;
+                        break;
+                    case DELAY_PICKER:
+                        format = DEFAULT_DELAY_FORMAT;
+                        format.setTimeZone(TimeZone.getTimeZone("UTC"));
+                        break;
+                    case DATE_PICKER:
+                    default:
+                        format = DEFAULT_DATE_FORMAT;
+                        break;
                 }
             } else {
                 type = Type.DATE_PICKER;
@@ -121,6 +132,9 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
             int minutes = initialDate.get(Calendar.MINUTE);
             TimePickerDialog dialog = new TimePickerDialog(getContext(), this, hourOfDay, minutes, false);
             dialog.show();
+        } else if (type == Type.DELAY_PICKER) {
+            CustomTimePickerDialog dialog = new CustomTimePickerDialog(getContext(), selectedDelay, this);
+            dialog.show();
         } else {
             int year;
             int month;
@@ -149,19 +163,57 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
         updateText();
     }
 
+    @Override
+    public void onTimeSet(android.helper.utils.TimePicker view, long delay) {
+        selectedDelay = delay;
+        updateText();
+    }
+
     private void updateText() {
-        if (selectedDate == null) {
-            this.setText("");
-            return;
+        if (type == Type.DELAY_PICKER) {
+            if (selectedDelay == 0) {
+                this.setText("");
+                return;
+            }
+            if (format != null) {
+                Date date = new Date(selectedDelay * 1000L);
+                this.setText(format.format(date));
+            } else {
+                this.setText(formatDelay(selectedDelay));
+            }
+        } else {
+            if (selectedDate == null) {
+                this.setText("");
+                return;
+            }
+            if (format != null)
+                this.setText(format.format(selectedDate));
+            else
+                this.setText(selectedDate.toString());
         }
-        if (format != null)
-            this.setText(format.format(selectedDate));
-        else
-            this.setText(selectedDate.toString());
+    }
+
+    private String formatDelay(long seconds) {
+        long s = seconds % 60;
+        long m = (seconds / 60) % 60;
+        long h = (seconds / (60 * 60)) % 24;
+        return String.format("%d:%02d:%02d", h, m, s);
     }
 
     public Date getDate() {
         return selectedDate;
+    }
+
+    public Date getTime() {
+        return selectedDate;
+    }
+
+    public long getDelay() {
+        return selectedDelay;
+    }
+
+    public long getDelayMillis() {
+        return selectedDelay * 1000L;
     }
 
     public void setDate(Date date) {
@@ -170,6 +222,16 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
             setInitialDate(date);
             updateText();
         }
+    }
+
+    public void setDelayMillis(long delay) {
+        selectedDelay = delay / 1000;
+        updateText();
+    }
+
+    public void setDelay(long seconds) {
+        selectedDelay = seconds;
+        updateText();
     }
 
     private void setDate(Date date, boolean shouldSetInitialDate) {
@@ -184,5 +246,12 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
 
     public void setInitialDate(Date date) {
         initialDate.setTime(date);
+    }
+
+    public void setInitialDelay(long delay) {
+        initialDelay = delay;
+        if (selectedDelay == 0) {
+            selectedDelay = initialDelay;
+        }
     }
 }

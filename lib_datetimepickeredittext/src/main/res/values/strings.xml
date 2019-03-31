@@ -1,2 +1,7 @@
 <resources>
+    <string name="time_set">Set time</string>
+    <string name="cancel">Cancel</string>
+    <string name="hour">Hour</string>
+    <string name="minute">Minute</string>
+    <string name="second">Second</string>
 </resources>
