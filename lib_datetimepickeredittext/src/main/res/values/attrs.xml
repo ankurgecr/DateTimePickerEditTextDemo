@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <declare-styleable name="DateTimePickerEditText">
-        <attr name="inputType" format="integer">
-            <flag name="date" value="0x00000000" />
-            <flag name="time" value="0x00000001" />
-            <flag name="delay" value="0x00000002" />
-            <!--<enum name="date" value="0" />-->
-            <!--<enum name="time" value="1" />-->
-            <!--<enum name="delay" value="2" />-->
+        <attr name="inputType" format="enum">
+            <enum name="date" value="0" />
+            <enum name="time" value="1" />
+            <enum name="delay" value="2" />
         </attr>
         <attr name="android:format" format="string" />
     </declare-styleable>
