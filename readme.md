@@ -5,10 +5,7 @@ A simple material EditText which allows to you pick Date and Time using Android'
 
 Preview
 ---------------
-<p>
-    <img src="https://i.imgur.com/IiJmpZ2.gif" width="45%" />
-    <img src="https://i.imgur.com/LyWFZuW.gif" width="45%" />
-</p>
+[Preview](https://i.imgur.com/ERfLz3G.gifv)
 
 Getting started
 ---------------
@@ -20,7 +17,7 @@ add the dependency to your project's build.gradle file:
 ```
 dependencies {
     //other dependencies
-    implementation "android.helper:datetimepickeredittext:$latestVersion"
+    implementation 'android.helper:datetimepickeredittext:1.0.4'
 }
 ```
 Then to sync up your project and you are all set to use DateTimePickerEditText.
@@ -31,13 +28,26 @@ To add Date UI componenet in your Layout XML file
     android:id="@+id/edt_date"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:inputType="date" />
+    app:inputType="date" />
+
+<android.helper.DateTimePickerEditText
+    android:id="@+id/edt_date_spinner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:datePickerType="spinner"
+    app:inputType="date" />
 
 <android.helper.DateTimePickerEditText
     android:id="@+id/edt_time"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:inputType="time" />
+    app:inputType="time" />
+
+<android.helper.DateTimePickerEditText
+    android:id="@+id/edt_delay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:inputType="delay" />
 ```
 
 default value for `android:inputType` is `date`
@@ -50,9 +60,11 @@ import android.helper.DateTimePickerEditText;
 
 DateTimePickerEditText edt_date = findViewById(R.id.edt_date);
 DateTimePickerEditText edt_time = findViewById(R.id.edt_time);
+DateTimePickerEditText edt_delay = findViewById(R.id.edt_delay);
 
 edt_phone.setDate(new Date());
 edt_time.setDate(new Date());
+edt_delay.setDelay(TimeUnit.MINUTES.toSeconds(1));
 
 Date selectedDate = edt_date.getDate();
 Date selectedTime = edt_time.getDate();
@@ -72,7 +84,9 @@ To specify the date or time format, use
 or
 
 ```
-edt_time.setFormat("dd/MM/yyyy");
+edt_date.setFormat("dd/MM/yyyy");
+edt_time.setFormat("hh:mm a");
+edt_delay.setFormat("HH:mm:ss");
 ```
 
 Questions?
