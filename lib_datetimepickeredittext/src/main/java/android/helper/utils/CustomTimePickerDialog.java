@@ -88,6 +88,7 @@ public class CustomTimePickerDialog extends AlertDialog implements OnClickListen
         timePicker.setOnTimeChangedListener(this);
     }
 
+    @Override
     public void onClick(DialogInterface dialog, int which) {
         if (mCallback != null) {
             timePicker.clearFocus();
@@ -95,6 +96,7 @@ public class CustomTimePickerDialog extends AlertDialog implements OnClickListen
         }
     }
 
+    @Override
     public void onTimeChanged(TimePicker view, long seconds) {
         //updateTitle(hourOfDay, minute, seconds);
     }
