@@ -17,7 +17,7 @@ add the dependency to your project's build.gradle file:
 ```
 dependencies {
     //other dependencies
-    implementation 'android.helper:datetimepickeredittext:1.0.3'
+    implementation 'android.helper:datetimepickeredittext:1.0.4'
 }
 ```
 Then to sync up your project and you are all set to use DateTimePickerEditText.
@@ -28,6 +28,13 @@ To add Date UI componenet in your Layout XML file
     android:id="@+id/edt_date"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:inputType="date" />
+
+<android.helper.DateTimePickerEditText
+    android:id="@+id/edt_date_spinner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:datePickerType="spinner"
     app:inputType="date" />
 
 <android.helper.DateTimePickerEditText

@@ -1,82 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:layoutDirection="ltr"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layoutDirection="ltr"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:padding="4dp"
+                android:text="@string/dtpe_hour"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:text="@string/hour" />
-
-                <NumberPicker
-                    android:id="@+id/hour"
-                    android:layout_width="70dip"
-                    android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true" />
-            </LinearLayout>
-
-            <LinearLayout
+            <NumberPicker
+                android:id="@+id/hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_margin="4dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:text="@string/minute" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
 
-                <NumberPicker
-                    android:id="@+id/minute"
-                    android:layout_width="70dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dip"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:padding="4dp"
+                android:text="@string/dtpe_minute"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:text="@string/second" />
+            <NumberPicker
+                android:id="@+id/minute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+        </LinearLayout>
 
-                <NumberPicker
-                    android:id="@+id/seconds"
-                    android:layout_width="70dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dip"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/dtpe_second"
+                android:textStyle="bold" />
+
+            <NumberPicker
+                android:id="@+id/seconds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
         </LinearLayout>
 
     </LinearLayout>
-</layout>
+
+</LinearLayout>

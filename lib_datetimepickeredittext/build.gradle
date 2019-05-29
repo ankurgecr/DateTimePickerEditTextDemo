@@ -4,7 +4,7 @@ apply plugin: 'com.android.library'
 publish {
     def groupProjectID = 'android.helper'
     def artifactProjectID = 'datetimepickeredittext'
-    def publishVersionID = '1.0.3'
+    def publishVersionID = '1.0.4'
 
     userOrg = 'ankurgecr'
     repoName = 'dateTimePickerEditText'
@@ -20,8 +20,8 @@ android {
 
     defaultConfig {
         minSdkVersion 11
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 5
+        versionName "1.0.4"
     }
 
     buildTypes {
