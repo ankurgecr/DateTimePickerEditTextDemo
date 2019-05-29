@@ -217,6 +217,7 @@ public class TimePicker extends FrameLayout {
 
     /**
      * Divides and sets the current delay seconds to Hour, Minute and Second
+     * @param delay total delay to set initially in seconds
      */
     public void setCurrentDelay(long delay) {
         currentSeconds = (int) (delay % 60);
