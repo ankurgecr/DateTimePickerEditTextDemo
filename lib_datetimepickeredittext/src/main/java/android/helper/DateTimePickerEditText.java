@@ -1,6 +1,5 @@
 package android.helper;
 
-import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -19,7 +18,8 @@ import java.util.TimeZone;
 
 //android.helper.DateTimePickerEditText
 public class DateTimePickerEditText extends android.support.v7.widget.AppCompatEditText
-        implements DatePickerDialog.OnDateSetListener,
+        implements android.app.DatePickerDialog.OnDateSetListener,
+        android.helper.utils.DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener,
         CustomTimePickerDialog.OnTimeSetListener {
 
@@ -39,6 +39,21 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
         }
     }
 
+    public enum DatePickerType {
+        CALENDAR(0),
+        SPINNER(1);
+
+        int value;
+
+        DatePickerType(int value) {
+            this.value = value;
+        }
+
+        int getValue() {
+            return this.value;
+        }
+    }
+
     private static final DateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
     private static final DateFormat DEFAULT_TIME_FORMAT = new SimpleDateFormat("hh:mm a");
     private static final DateFormat DEFAULT_DELAY_FORMAT = new SimpleDateFormat("HH:mm:ss");
@@ -46,6 +61,7 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
     private DateFormat format;
     //private String delayFormat;
     private Type type = Type.DATE_PICKER;
+    private DatePickerType datePickerType = DatePickerType.CALENDAR;
     private Date selectedDate;
     private long selectedDelay = 0;
 
@@ -91,6 +107,13 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
             } else {
                 type = Type.DATE_PICKER;
                 format = DEFAULT_DATE_FORMAT;
+            }
+
+            if (ta.hasValue(R.styleable.DateTimePickerEditText_datePickerType)) {
+                int value = ta.getInt(R.styleable.DateTimePickerEditText_datePickerType, 0);
+                datePickerType = DatePickerType.values()[value];
+            } else {
+                datePickerType = DatePickerType.CALENDAR;
             }
 
             String str_format = ta.getString(R.styleable.DateTimePickerEditText_android_format);
@@ -142,8 +165,22 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
             year = initialDate.get(Calendar.YEAR);
             month = initialDate.get(Calendar.MONTH);
             day = initialDate.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog dialog = new DatePickerDialog(getContext(), this, year, month, day);
-            dialog.show();
+
+            if (datePickerType == DatePickerType.SPINNER) {
+                android.helper.utils.DatePickerDialog dialog;
+                dialog = new android.helper.utils.DatePickerDialog(
+                        getContext(), this, year, month, day
+                );
+                dialog.getDatePicker().setCalendarViewShown(false);
+                dialog.show();
+            } else {
+                android.app.DatePickerDialog dialog;
+                dialog = new android.app.DatePickerDialog(
+                        getContext(), this, year, month, day
+                );
+                dialog.getDatePicker().setCalendarViewShown(true);
+                dialog.show();
+            }
         }
     }
 

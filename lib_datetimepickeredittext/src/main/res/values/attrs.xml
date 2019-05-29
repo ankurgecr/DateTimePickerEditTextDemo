@@ -6,6 +6,10 @@
             <enum name="time" value="1" />
             <enum name="delay" value="2" />
         </attr>
+        <attr name="datePickerType" format="enum">
+            <enum name="calendar" value="0" />
+            <enum name="spinner" value="1" />
+        </attr>
         <attr name="android:format" format="string" />
     </declare-styleable>
 </resources>

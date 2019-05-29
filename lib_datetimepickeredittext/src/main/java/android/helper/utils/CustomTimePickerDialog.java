@@ -73,8 +73,8 @@ public class CustomTimePickerDialog extends AlertDialog implements OnClickListen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         mCallback = callBack;
 
-        setButton(context.getText(R.string.time_set), this);
-        setButton2(context.getText(R.string.cancel), (OnClickListener) null);
+        setButton(context.getText(R.string.dtpe_time_set), this);
+        setButton2(context.getText(R.string.dtpe_cancel), (OnClickListener) null);
         //setIcon(android.R.drawable.ic_dialog_time);
 
         LayoutInflater inflater =

@@ -1,7 +1,9 @@
 <resources>
-    <string name="time_set">Set time</string>
-    <string name="cancel">Cancel</string>
-    <string name="hour">Hour</string>
-    <string name="minute">Minute</string>
-    <string name="second">Second</string>
+    <string name="dtpe_time_set">Set time</string>
+    <string name="dtpe_cancel">Cancel</string>
+    <string name="dtpe_hour">Hour</string>
+    <string name="dtpe_minute">Minute</string>
+    <string name="dtpe_second">Second</string>
+    <string name="dtpe_date_time_done">Done</string>
+    <string name="dtpe_date_picker_dialog_title">Set date</string>
 </resources>
