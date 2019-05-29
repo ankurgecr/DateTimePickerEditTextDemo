@@ -56,7 +56,8 @@
             android:layout_margin="@dimen/gap_internal"
             android:layout_weight="1"
             android:hint="@string/time"
-            app:inputType="time" />
+            app:inputType="time"
+            tools:ignore="missingPrefix" />
 
         <Button
             android:id="@+id/btn_now"
@@ -87,7 +88,8 @@
             android:layout_margin="@dimen/gap_internal"
             android:layout_weight="1"
             android:hint="@string/delay"
-            app:inputType="delay" />
+            app:inputType="delay"
+            tools:ignore="missingPrefix" />
 
         <Button
             android:id="@+id/btn_now2"
