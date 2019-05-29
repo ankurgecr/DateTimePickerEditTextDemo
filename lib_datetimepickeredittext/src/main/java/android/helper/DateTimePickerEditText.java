@@ -205,7 +205,7 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
     }
 
     public Date getTime() {
-        return selectedDate;
+        return getDate();
     }
 
     public long getDelay() {
@@ -222,6 +222,10 @@ public class DateTimePickerEditText extends android.support.v7.widget.AppCompatE
             setInitialDate(date);
             updateText();
         }
+    }
+
+    public void setTime(Date date) {
+        setDate(date);
     }
 
     public void setDelayMillis(long delay) {
