@@ -20,7 +20,7 @@ add the dependency to your project's build.gradle file:
 ```
 dependencies {
     //other dependencies
-    implementation "android.helper:dateTimePickerEditText:$latestVersion"
+    implementation "android.helper:datetimepickeredittext:$latestVersion"
 }
 ```
 Then to sync up your project and you are all set to use DateTimePickerEditText.
